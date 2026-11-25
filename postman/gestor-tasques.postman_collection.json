@@ -1,0 +1,378 @@
+{
+  "info": {
+    "_postman_id": "5b45fd08-6f11-4cf6-81c7-f1baf1ac7d2c",
+    "name": "Gestor de tasques",
+    "description": "Set peticions de l'API del gestor de tasques amb respostes obtingudes en proves reals contra MongoDB local.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. POST - Crear una tasca correcta",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Dissenyar una pàgina web\",\n  \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n  \"cost\": 500,\n  \"hours_estimated\": 20,\n  \"image\": \"https://example.com/images/task1.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 201 Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dissenyar una pàgina web\",\n  \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n  \"cost\": 500,\n  \"hours_estimated\": 20,\n  \"image\": \"https://example.com/images/task1.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/tasks"
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"title\": \"Dissenyar una pàgina web\",\n  \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n  \"cost\": 500,\n  \"hours_estimated\": 20,\n  \"image\": \"https://example.com/images/task1.jpg\",\n  \"completed\": false,\n  \"finished_at\": null,\n  \"_id\": \"6b05ce047cc50a1bfee1a791\",\n  \"createdAt\": \"2026-11-24T17:48:52.542Z\",\n  \"__v\": 0\n}"
+        }
+      ]
+    },
+    {
+      "name": "2. POST - Crear una tasca sense cost",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Tasca incompleta\",\n  \"hours_estimated\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 400 Bad Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Tasca incompleta\",\n  \"hours_estimated\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/tasks"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"error\": \"No s’ha pogut crear la tasca\",\n  \"details\": \"Task validation failed: cost: El cost és obligatori\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "3. GET - Obtenir totes les tasques",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/api/tasks"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"_id\": \"6b05ce047cc50a1bfee1a791\",\n    \"title\": \"Dissenyar una pàgina web\",\n    \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n    \"cost\": 500,\n    \"hours_estimated\": 20,\n    \"image\": \"https://example.com/images/task1.jpg\",\n    \"completed\": false,\n    \"finished_at\": null,\n    \"createdAt\": \"2026-11-24T17:48:52.542Z\",\n    \"__v\": 0\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "4. GET - Obtenir una tasca pel seu ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks/6b05ce047cc50a1bfee1a791",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks",
+            "6b05ce047cc50a1bfee1a791"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/api/tasks/6b05ce047cc50a1bfee1a791"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"_id\": \"6b05ce047cc50a1bfee1a791\",\n  \"title\": \"Dissenyar una pàgina web\",\n  \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n  \"cost\": 500,\n  \"hours_estimated\": 20,\n  \"image\": \"https://example.com/images/task1.jpg\",\n  \"completed\": false,\n  \"finished_at\": null,\n  \"createdAt\": \"2026-11-24T17:48:52.542Z\",\n  \"__v\": 0\n}"
+        }
+      ]
+    },
+    {
+      "name": "5. GET - Obtenir una tasca amb un ID inexistent",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks/6734a1f2c9e7b3d1a0f4e813",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks",
+            "6734a1f2c9e7b3d1a0f4e813"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 404 Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/api/tasks/6734a1f2c9e7b3d1a0f4e813"
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Tasca no trobada\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "6. PUT - Marcar una tasca com a completada",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"completed\": true,\n  \"hours_real\": 15,\n  \"image\": \"https://example.com/images/updated_task.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/tasks/6b05ce047cc50a1bfee1a791",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks",
+            "6b05ce047cc50a1bfee1a791"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 200 OK",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"completed\": true,\n  \"hours_real\": 15,\n  \"image\": \"https://example.com/images/updated_task.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:3000/api/tasks/6b05ce047cc50a1bfee1a791"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"_id\": \"6b05ce047cc50a1bfee1a791\",\n  \"title\": \"Dissenyar una pàgina web\",\n  \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n  \"cost\": 500,\n  \"hours_estimated\": 20,\n  \"image\": \"https://example.com/images/updated_task.jpg\",\n  \"completed\": true,\n  \"finished_at\": \"2026-11-24T17:48:52.556Z\",\n  \"createdAt\": \"2026-11-24T17:48:52.542Z\",\n  \"__v\": 0,\n  \"hours_real\": 15\n}"
+        }
+      ]
+    },
+    {
+      "name": "7. DELETE - Eliminar una tasca",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks/6b05ce047cc50a1bfee1a791",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "tasks",
+            "6b05ce047cc50a1bfee1a791"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resposta de prova - 200 OK",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:3000/api/tasks/6b05ce047cc50a1bfee1a791"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Tasca eliminada amb èxit\",\n  \"task\": {\n    \"_id\": \"6b05ce047cc50a1bfee1a791\",\n    \"title\": \"Dissenyar una pàgina web\",\n    \"description\": \"Crear una pàgina web responsiva amb HTML, CSS i JavaScript\",\n    \"cost\": 500,\n    \"hours_estimated\": 20,\n    \"image\": \"https://example.com/images/updated_task.jpg\",\n    \"completed\": true,\n    \"finished_at\": \"2026-11-24T17:48:52.556Z\",\n    \"createdAt\": \"2026-11-24T17:48:52.542Z\",\n    \"__v\": 0,\n    \"hours_real\": 15\n  }\n}"
+        }
+      ]
+    }
+  ]
+}
